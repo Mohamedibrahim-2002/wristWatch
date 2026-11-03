@@ -113,3 +113,4 @@ router.post('/gdpr/consent', requireAuth, validateBody(PrivacyConsentSchema), (r
 });
 
 export default router;
+

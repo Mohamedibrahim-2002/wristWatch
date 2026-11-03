@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev:server": "tsx watch server/server.ts",
+    "dev:php": "php -S localhost:5000 -t php-backend",
     "dev:client": "vite",
     "dev": "vite",
     "build:client": "vite build",

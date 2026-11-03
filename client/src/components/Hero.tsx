@@ -142,3 +142,4 @@ export const Hero: React.FC<HeroProps> = ({ onExplore, onCustomize, onOpenCompli
     </div>
   );
 };
+

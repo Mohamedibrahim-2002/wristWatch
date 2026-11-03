@@ -300,3 +300,4 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBackToShopping
     </div>
   );
 };
+

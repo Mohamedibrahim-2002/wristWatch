@@ -608,3 +608,4 @@ export const WatchConfigurator: React.FC<WatchConfiguratorProps> = ({ initialWat
     </div>
   );
 };
+

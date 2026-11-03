@@ -194,3 +194,4 @@ export const WatchCatalog: React.FC<WatchCatalogProps> = ({ onCustomize, onViewD
     </section>
   );
 };
+

@@ -11,3 +11,4 @@ services:
       - JWT_SECRET=swebok_v4_production_secret_key_luxury_horology_2026
       - CORS_ORIGIN=http://localhost:5000
     restart: unless-stopped
+

@@ -108,3 +108,4 @@ describe('SWEBOK v4 Ch. 13: Software Security & RBAC Enforcement', () => {
     expect(res.body.error.code).toBe('VALIDATION_ERROR');
   });
 });
+

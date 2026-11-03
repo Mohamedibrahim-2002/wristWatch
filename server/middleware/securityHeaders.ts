@@ -46,3 +46,4 @@ export const configureCors = () => {
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
   });
 };
+

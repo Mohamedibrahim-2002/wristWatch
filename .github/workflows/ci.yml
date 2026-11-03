@@ -35,3 +35,4 @@ jobs:
 
       - name: Build Application (Frontend & Server)
         run: npm run build
+

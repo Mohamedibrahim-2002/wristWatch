@@ -129,3 +129,4 @@ export const GdprConsentBanner: React.FC = () => {
     </div>
   );
 };
+

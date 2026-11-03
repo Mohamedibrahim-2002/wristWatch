@@ -127,3 +127,4 @@ describe('SWEBOK v4 Ch. 04: Two-Phase Commitment & Atomic Rollback', () => {
     expect(order.pricing.finalTotalInCents).toBe(159100); // 145000 + 8% tax (11600) + 2500 shipping
   });
 });
+

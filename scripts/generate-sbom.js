@@ -62,3 +62,4 @@ const sbom = {
 fs.writeFileSync(outputPath, JSON.stringify(sbom, null, 2), 'utf8');
 console.log(`[SBOM] CycloneDX SBOM successfully generated at: ${outputPath}`);
 console.log(`[SBOM] Total tracked software components: ${components.length}`);
+

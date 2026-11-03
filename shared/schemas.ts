@@ -159,3 +159,4 @@ export const PrivacyConsentSchema = z.object({
   analyticsCookies: z.boolean().default(false),
   marketingCookies: z.boolean().default(false),
 });
+

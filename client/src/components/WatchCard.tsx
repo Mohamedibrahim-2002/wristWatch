@@ -139,3 +139,4 @@ export const WatchCard: React.FC<WatchCardProps> = ({ watch, onCustomize, onView
     </div>
   );
 };
+

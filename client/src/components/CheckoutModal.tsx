@@ -363,3 +363,4 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, o
     </div>
   );
 };
+

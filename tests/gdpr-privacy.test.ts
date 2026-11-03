@@ -58,3 +58,4 @@ describe('SWEBOK v4 Ch. 14: Data Privacy & GDPR/CCPA Compliance', () => {
     expect(store.getUserById(temp.user.id)).toBeUndefined();
   });
 });
+

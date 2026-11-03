@@ -92,3 +92,4 @@ describe('SWEBOK v4 Ch. 04: Pricing Engine & Integer Cents Precision', () => {
     expect(formatCurrencyCents(99)).toBe('$0.99');
   });
 });
+
