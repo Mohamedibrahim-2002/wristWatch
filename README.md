@@ -1,123 +1,108 @@
 # Aethel & Kronos Genève — Wrist Watch Web Application
-### IEEE SWEBOK v4 Certified Security & Software Engineering Architecture
+### 100% PHP & MySQL Architecture • IEEE SWEBOK v4 Certified
 
+[![PHP 8.2+](https://img.shields.io/badge/PHP-8.2%2B-blue.svg)](https://www.php.net)
+[![MySQL Server](https://img.shields.io/badge/Database-MySQL%20%2F%20MariaDB-orange.svg)](https://www.mysql.com)
+[![XAMPP Ready](https://img.shields.io/badge/Environment-XAMPP%20%2F%20WAMP-success.svg)](https://www.apachefriends.org)
 [![SWEBOK v4 Compliant](https://img.shields.io/badge/SWEBOK%20v4-IEEE%20Compliant-gold.svg)](https://www.computer.org/education/bodies-of-knowledge/software-engineering)
-[![Vulnerabilities: 0](https://img.shields.io/badge/Vulnerabilities-0%20High%2F0%20Crit-brightgreen.svg)](https://docs.npmjs.com/cli/v8/commands/npm-audit)
-[![Tests Passing](https://img.shields.io/badge/Tests-19%2F19%20Passing%20(100%25)-success.svg)](./tests)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
-A luxury Swiss horology web application combining master timepiece catalog browsing, an interactive real-time 2D/vector bespoke watch customizer, transparent cart calculations, PCI-DSS compliant checkout tokenization, and administrative inventory controls.
+A complete luxury Swiss timepiece web application featuring master catalog browsing, an interactive real-time 2D bespoke watch customizer, shopping bag management, PCI-DSS tokenized checkout, and administrative inventory controls.
 
-Built and maintained strictly under the **IEEE Guide to the Software Engineering Body of Knowledge (SWEBOK v4)**.
-
----
-
-## 1. Architectural Context & System Boundary
-
-```
-[System Boundary: Wrist Watch Web App]
-├── Frontend Client (SPA: Watch Catalog, Live 2D Configurator, Horology Bag, Checkout)
-├── API Gateway & Microservices (Auth & RBAC, Catalog, Configurator, Cart, Order, Inventory)
-├── Payment Processing Integration (PCI-DSS Level 1 Compliant Gateway Abstraction)
-└── Secure Data Persistence (ACID Two-Phase Commitment with Atomic Rollback)
-```
+**Engineered in 100% pure PHP and MySQL (Zero Node.js or Express runtime required).**
 
 ---
 
-## 2. SWEBOK v4 Knowledge Area (KA) Alignment Matrix
+## 1. System Architecture
 
-| SWEBOK v4 Chapter | Knowledge Area | Implementation in Wrist Watch Web Application |
+```
+[System Boundary: Wrist Watch Web Application]
+├── Web & API Front Controller (index.php)
+├── Application Modules (app/)
+│   ├── Config (Config.php, Database.php with PDO Prepared Statements)
+│   ├── Controllers (Catalog, Cart, Order, Auth, Admin, Health)
+│   ├── Middleware (RBAC Default Deny, Security Headers, CORS, CSP)
+│   └── Services (PricingService with Integer Cents, AuthService, PaymentGateway)
+├── Relational Storage (database/schema.sql)
+│   └── MySQL / MariaDB (watches, users, orders, order_items, cart_items, user_consents)
+└── User Interface (public/assets/)
+    └── Interactive 2D Vector Watch Studio, Luxury Catalog, Bag Drawer & Modals
+```
+
+---
+
+## 2. IEEE SWEBOK v4 Alignment Matrix
+
+| SWEBOK v4 Chapter | Knowledge Area | Implementation in PHP & MySQL |
 |---|---|---|
-| **Chapter 01** | **Software Requirements** | Distinguishes functional features (calibre filtering, customizer selection) from non-functional QoS constraints (&lt;1.5s rendering speed, ATDD unit criteria). |
-| **Chapter 02 & 03** | **Architecture & Modular Design** | Separation of Concerns (SoC): Client visual rendering is strictly decoupled from pricing rules. Microservice/modular routers (`Catalog`, `Cart`, `Order`, `Auth`, `Admin`). |
-| **Chapter 04** | **Software Construction** | Defensive Programming: Integer cents (`priceInCents`) eliminate floating-point inaccuracies. Two-phase inventory deduction with automatic rollback on payment decline. |
-| **Chapter 05 & 12** | **Testing & Quality Assurance** | 19 automated Vitest test cases testing pricing engines, RBAC authorization, anti-tampering, two-phase rollbacks, and GDPR endpoints. |
-| **Chapter 06** | **DevSecOps & Operations** | Multi-stage Docker containerization running under non-root unprivileged `node` user; GitHub Actions automated CI testing. |
-| **Chapter 08** | **Supply Chain & SCM** | Active Software Bill of Materials (`sbom.cyclonedx.json`) generated in CycloneDX standard. `npm audit` reports 0 vulnerabilities. |
-| **Chapter 13** | **Software Security & Threats** | Strict input validation via Zod allowlists, Default Deny RBAC, Helmet secure headers, CSP, Anti-CSRF, PCI tokenization (`tok_...`). |
-| **Chapter 14** | **Professional Practice & Privacy** | Zero Dark Patterns: Transparent pricing breakdowns (base, add-ons, 8% tax, shipping). Full GDPR compliance (Art. 17 Erasure, Art. 20 Portability). |
+| **Chapter 01** | **Software Requirements** | Functional filtering by calibre, case diameter, and water resistance; QoS sub-second rendering. |
+| **Chapter 02 & 03** | **Architecture & Design** | Separation of Concerns (SoC): Client visual vector rendering is decoupled from server-side pricing logic. |
+| **Chapter 04** | **Software Construction** | Defensive Programming: Integer cents (`base_price_in_cents`, `taxInCents`) eliminate floating-point loss. MySQL transactions with automatic rollback on declined charges. |
+| **Chapter 05 & 12** | **Testing & QA** | Native PHP automated test suite (`php tests/TestRunner.php`) validating financial logic, RBAC security, and token verification. |
+| **Chapter 13** | **Software Security** | PDO prepared statements for SQLi prevention, Role-Based Access Control (`requireAdmin`), Helmet-equivalent security headers, PCI tokenization (`tok_...`). |
+| **Chapter 14** | **Professional Practice & Privacy** | Zero Dark Patterns: Transparent price breakdown (base, component add-ons, 8% tax, shipping). GDPR Art. 17 right to erasure & Art. 20 data portability. |
 
 ---
 
-## 3. Security & Engineering Directives
+## 3. Quick Start with XAMPP (Recommended)
 
-### A. Server-Side Price Recalculation (Anti-Tampering)
-Client applications **never** dictate currency prices. When a user submits an item to the bag or completes checkout:
-1. The server loads the canonical base watch price from the database.
-2. The server verifies each chosen customizer parameter (alloy, bezel, dial, hands, strap, movement, engraving).
-3. The server computes the canonical subtotal, coupon discount, 8% sales tax, and shipping fee in **integer cents**.
-4. Any client payload price is discarded, preventing price manipulation attacks.
+### Step 1: Install & Start XAMPP
+1. Download **XAMPP for Windows** (PHP 8.1 or higher) from **[apachefriends.org](https://www.apachefriends.org)**.
+2. Open **XAMPP Control Panel** and click **Start** for both **Apache** and **MySQL**.
 
-### B. Two-Phase Inventory Commitment with Safe Rollback (SWEBOK v4 Ch. 04)
-During checkout:
-1. **Phase 1 (Allocation):** Available stock is atomically verified and deducted from the catalog.
-2. **Phase 2 (Payment Authorization):** Payment token is processed through the PCI gateway abstraction.
-3. **Rollback Closure:** If payment fails or is declined, an automatic atomic rollback restores the inventory baseline to prevent stock desynchronization.
+### Step 2: Import the MySQL Database
+1. Open your browser to: **`http://localhost/phpmyadmin`**
+2. Click **Databases**, create database named: **`wristwatch_db`** (Collation: `utf8mb4_unicode_ci`).
+3. Click `wristwatch_db` on the left sidebar, go to the **Import** tab.
+4. Click **Choose File**, select `database/schema.sql` from this project, and click **Import**.
 
-### C. Client-Side Payment Tokenization (PCI-DSS Compliance)
-Raw primary account numbers (PAN) and CVC codes are never sent to the merchant web server. The client interface delegates card tokenization to the payment vault, exchanging card data for a single-use token (`tok_...`).
+### Step 3: Run the Application
+
+You can run the web app in either of two ways:
+
+#### Option A: Direct Deployment in XAMPP `htdocs`
+Copy this project folder into `C:\xampp\htdocs\wristwatch`.
+Open in your browser:
+👉 **`http://localhost/wristwatch`**
+
+#### Option B: PHP Built-in Server
+With MySQL running in XAMPP, open a terminal in this project folder:
+```powershell
+php -S localhost:5000 index.php
+```
+Open in your browser:
+👉 **`http://localhost:5000`**
 
 ---
 
-## 4. Getting Started
+## 4. Running the Automated PHP Test Suite
 
-### Prerequisites
-- Node.js >= 20.x
-- npm >= 10.x
+To run the native SWEBOK v4 automated test suite in PHP:
 
-### Installation
-```bash
-# Clone the repository
-git clone https://github.com/Mohamedibrahim-2002/wristWatch.git
-cd wristWatch
-
-# Install audited dependencies
-npm install
-
-# Run automated SWEBOK v4 test suite
-npm test
-
-# Generate Software Bill of Materials (SBOM)
-npm run sbom:generate
+```powershell
+php tests/TestRunner.php
 ```
 
-### Running in Development
-```bash
-# Start backend API server (port 5000)
-npm run dev:server
-
-# In a separate terminal, start frontend Vite client (port 3000)
-npm run dev:client
-```
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-### Running in Production
-```bash
-# Build client and server
-npm run build
-
-# Start production server (serves API and built client on port 5000)
-npm start
-```
-Open [http://localhost:5000](http://localhost:5000).
+All pricing calculations, security JWT token verification, and PCI gateway assertions will execute and report pass/fail status in the terminal.
 
 ---
 
-## 5. Demo Credentials
+## 5. Pre-Configured Test Accounts
 
-| Role | Email | Password | Access Privileges |
+| Account Role | Email | Password | Access Privileges |
 |---|---|---|---|
-| **Chief Horologist (Admin)** | `admin@wristwatch.luxury` | `AdminPass123!` | Full stock inventory adjustment, supply chain order pipeline management |
-| **Watch Collector (Customer)** | `collector@wristwatch.luxury` | `CustomerPass123!` | Catalog browsing, bespoke customizer, cart, checkout, GDPR export & erasure |
+| **Chief Horologist (Admin)** | `admin@wristwatch.luxury` | `AdminPass123!` | Real-time inventory control, price adjustments, order pipeline status |
+| **Watch Collector (Customer)** | `collector@wristwatch.luxury` | `CustomerPass123!` | Bespoke customizer, cart, checkout, GDPR export & account erasure |
 
 ---
 
-## 6. SWEBOK v4 Verification Checklist
+## 6. SWEBOK v4 Verification Endpoints
 
-- [x] **Server-Side Price Verification**: All customizer calculations execute server-side; client payload prices are ignored.
-- [x] **Payment Tokenization**: Credit card data never touches application backend directly.
-- [x] **Authentication & Access Control**: Admin inventory routes protected by strict RBAC (`requireAdmin` middleware).
-- [x] **Input Sanitization**: Client inputs, search queries, addresses, and custom engravings validated via Zod allowlists.
-- [x] **Currency Math Precision**: Integer amounts (cents) utilized for 100% calculation accuracy.
-- [x] **Dependency Audit & SBOM**: CycloneDX SBOM generated; `npm audit` reports 0 vulnerabilities.
-- [x] **Ethical E-Commerce UX**: Itemized pricing, transparent shipping thresholds, zero dark patterns.
+* **Health & Compliance Ping**: `GET /api/health`
+* **Watch Catalog**: `GET /api/catalog`
+* **Customizer Price Verification**: `POST /api/catalog/customizer/price`
+* **Persistent Cart**: `GET /api/cart`
+* **PCI-DSS Tokenized Checkout**: `POST /api/orders/checkout`
+* **Customer Orders**: `GET /api/orders/my-orders`
+* **Admin Inventory**: `GET /api/admin/inventory`
+* **GDPR Data Portability (JSON)**: `GET /api/auth/gdpr/export`
