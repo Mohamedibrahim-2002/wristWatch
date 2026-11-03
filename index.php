@@ -37,10 +37,18 @@ $requestUri = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
 $method = strtoupper($_SERVER['REQUEST_METHOD'] ?? 'GET');
 
 // Compute base directory path (supports running in XAMPP subdirectory e.g. /wristwatch/ or at root /)
-$scriptDir = dirname($_SERVER['SCRIPT_NAME'] ?? '');
-$scriptDir = str_replace('\\', '/', $scriptDir);
-if ($scriptDir === '/') $scriptDir = '';
-$basePath = rtrim($scriptDir, '/');
+if (php_sapi_name() === 'cli-server') {
+    $basePath = '';
+} else {
+    $scriptName = str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? '');
+    if (str_ends_with($scriptName, '.php')) {
+        $scriptDir = dirname($scriptName);
+        $scriptDir = str_replace('\\', '/', $scriptDir);
+        $basePath = ($scriptDir === '/' || $scriptDir === '.') ? '' : rtrim($scriptDir, '/');
+    } else {
+        $basePath = '';
+    }
+}
 
 // Relative path inside this application
 $relPath = $requestUri;
@@ -52,8 +60,13 @@ if ($relPath === '' || $relPath === false) $relPath = '/';
 // ---------------------------------------------------------------------
 // 1. STATIC ASSET SERVING (CSS, JS, Fonts, Images)
 // ---------------------------------------------------------------------
-if (preg_match('#^/assets/(.+\.(js|css|png|jpg|jpeg|svg|woff2?|ttf))$#i', $relPath, $matches)) {
-    $assetPath = __DIR__ . '/public/assets/' . $matches[1];
+if (preg_match('#^/assets/(.+\.(js|css|png|jpg|jpeg|svg|woff2?|ttf|ico|map))$#i', $relPath, $matches)) {
+    $fileName = $matches[1];
+    $assetPath = __DIR__ . '/dist/assets/' . $fileName;
+    if (!file_exists($assetPath)) {
+        $assetPath = __DIR__ . '/public/assets/' . $fileName;
+    }
+
     if (file_exists($assetPath)) {
         $ext = strtolower(pathinfo($assetPath, PATHINFO_EXTENSION));
         $mimes = [
@@ -66,12 +79,19 @@ if (preg_match('#^/assets/(.+\.(js|css|png|jpg|jpeg|svg|woff2?|ttf))$#i', $relPa
             'woff'  => 'font/woff',
             'woff2' => 'font/woff2',
             'ttf'   => 'font/ttf',
+            'ico'   => 'image/x-icon',
+            'map'   => 'application/json',
         ];
         header('Content-Type: ' . ($mimes[$ext] ?? 'application/octet-stream'));
         header('Cache-Control: public, max-age=31536000, immutable');
         readfile($assetPath);
         exit;
     }
+}
+
+if ($relPath === '/favicon.ico') {
+    header('Content-Type: image/x-icon');
+    exit;
 }
 
 // ---------------------------------------------------------------------
@@ -228,16 +248,21 @@ if (str_starts_with($relPath, '/api')) {
 // Determine correct asset prefix for running in root or subdirectory
 $assetPrefix = $basePath . '/assets';
 
-// Dynamically locate compiled bundles
-$cssFiles = glob(__DIR__ . '/public/assets/*.css');
-$cssFile = !empty($cssFiles) ? basename($cssFiles[0]) : 'index-DRQG0K5B.css';
+// Dynamically locate compiled bundles in dist/assets or public/assets
+$cssFiles = array_merge(glob(__DIR__ . '/dist/assets/*.css') ?: [], glob(__DIR__ . '/public/assets/*.css') ?: []);
+if (!empty($cssFiles)) {
+    usort($cssFiles, function ($a, $b) { return filemtime($b) - filemtime($a); });
+    $cssFile = basename($cssFiles[0]);
+} else {
+    $cssFile = 'index-DRQG0K5B.css';
+}
 
-$jsFiles = glob(__DIR__ . '/public/assets/index-*.js');
-// Pick newest JS bundle
-$jsFile = 'index-CVNSmOA_.js';
+$jsFiles = array_merge(glob(__DIR__ . '/dist/assets/index-*.js') ?: [], glob(__DIR__ . '/public/assets/index-*.js') ?: []);
 if (!empty($jsFiles)) {
     usort($jsFiles, function ($a, $b) { return filemtime($b) - filemtime($a); });
     $jsFile = basename($jsFiles[0]);
+} else {
+    $jsFile = 'index-CVNSmOA_.js';
 }
 ?>
 <!DOCTYPE html>
@@ -252,6 +277,7 @@ if (!empty($jsFiles)) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" crossorigin href="<?= htmlspecialchars($assetPrefix . '/' . $cssFile) ?>">
+    <script>window.__API_BASE__ = "<?= htmlspecialchars($basePath . '/api') ?>";</script>
     <script type="module" crossorigin src="<?= htmlspecialchars($assetPrefix . '/' . $jsFile) ?>"></script>
   </head>
   <body class="bg-luxury-950 text-slate-100 antialiased selection:bg-luxury-gold selection:text-black">

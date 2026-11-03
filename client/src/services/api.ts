@@ -13,7 +13,7 @@ import {
   ApiResponse,
 } from '../../shared/types.js';
 
-const API_BASE = '/api';
+const API_BASE = (typeof window !== 'undefined' && (window as any).__API_BASE__) || '/api';
 
 class ApiService {
   private getHeaders(): HeadersInit {
