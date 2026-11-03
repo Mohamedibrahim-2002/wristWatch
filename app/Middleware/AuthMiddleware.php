@@ -61,3 +61,4 @@ class AuthMiddleware {
         return $user;
     }
 }
+

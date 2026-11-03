@@ -143,3 +143,4 @@ class TestRunner {
 
 $runner = new TestRunner();
 $runner->runAll();
+

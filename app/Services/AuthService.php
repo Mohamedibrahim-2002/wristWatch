@@ -176,3 +176,4 @@ class AuthService {
         return $delStmt->execute([':id' => $userId]);
     }
 }
+

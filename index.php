@@ -247,3 +247,4 @@ $assetPrefix = $basePath . '/assets';
     <div id="root"></div>
   </body>
 </html>
+

@@ -147,3 +147,4 @@ class AdminController {
         echo json_encode(['success' => true, 'message' => "Order {$orderId} updated to {$status}"]);
     }
 }
+

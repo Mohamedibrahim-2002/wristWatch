@@ -190,3 +190,4 @@ class CartController {
         echo json_encode(['success' => true, 'message' => 'Cart cleared']);
     }
 }
+

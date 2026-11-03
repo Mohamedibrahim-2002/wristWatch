@@ -164,3 +164,4 @@ class AuthController {
         echo json_encode(['success' => true, 'message' => 'Consent preferences updated']);
     }
 }
+
