@@ -1,7 +1,6 @@
 import React from 'react';
 import { X, Sliders, ShoppingBag, ShieldCheck, Clock, Compass, Activity, Droplets } from 'lucide-react';
-import { WatchItem } from '../../../shared/types.js';
-import { formatCurrencyCents } from '../../../server/services/pricingService.js';
+import { WatchItem, formatCurrencyCents } from '../../../shared/types.js';
 import { useCart } from '../context/CartContext.js';
 
 interface WatchDetailModalProps {

@@ -9,9 +9,9 @@ import {
   StrapMaterial,
   MovementType,
   TransparentPriceBreakdown,
+  formatCurrencyCents,
 } from '../../../shared/types.js';
 import { api } from '../services/api.js';
-import { formatCurrencyCents } from '../../../server/services/pricingService.js';
 import { WatchRenderer } from './WatchRenderer.js';
 import { useCart } from '../context/CartContext.js';
 import {

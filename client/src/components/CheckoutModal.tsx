@@ -3,8 +3,7 @@ import { X, ShieldCheck, Lock, CreditCard, CheckCircle2, AlertTriangle, Truck } 
 import { useCart } from '../context/CartContext.js';
 import { useAuth } from '../context/AuthContext.js';
 import { api } from '../services/api.js';
-import { formatCurrencyCents } from '../../../server/services/pricingService.js';
-import { Order } from '../../../shared/types.js';
+import { Order, formatCurrencyCents } from '../../../shared/types.js';
 
 interface CheckoutModalProps {
   isOpen: boolean;

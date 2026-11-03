@@ -164,3 +164,15 @@ export interface ApiResponse<T = any> {
   };
 }
 
+/**
+ * Format integer cents into human-readable currency ($1,250.00).
+ */
+export function formatCurrencyCents(cents: number): string {
+  const dollars = cents / 100;
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+  }).format(dollars);
+}
+

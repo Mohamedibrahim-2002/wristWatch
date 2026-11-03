@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { User as UserIcon, Package, Shield, Download, Trash2, LogOut, ExternalLink, Clock } from 'lucide-react';
 import { useAuth } from '../context/AuthContext.js';
 import { api } from '../services/api.js';
-import { Order } from '../../../shared/types.js';
-import { formatCurrencyCents } from '../../../server/services/pricingService.js';
+import { Order, formatCurrencyCents } from '../../../shared/types.js';
 
 interface AccountDashboardProps {
   onBackToShopping: () => void;

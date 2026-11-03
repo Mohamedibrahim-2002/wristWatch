@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Wrench, Package, AlertTriangle, TrendingUp, Check, Save, ArrowLeft, RefreshCw } from 'lucide-react';
 import { api } from '../services/api.js';
-import { WatchItem, Order } from '../../../shared/types.js';
-import { formatCurrencyCents } from '../../../server/services/pricingService.js';
+import { WatchItem, Order, formatCurrencyCents } from '../../../shared/types.js';
 
 interface AdminDashboardProps {
   onBackToShopping: () => void;

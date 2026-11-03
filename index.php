@@ -228,6 +228,17 @@ if (str_starts_with($relPath, '/api')) {
 // Determine correct asset prefix for running in root or subdirectory
 $assetPrefix = $basePath . '/assets';
 
+// Dynamically locate compiled bundles
+$cssFiles = glob(__DIR__ . '/public/assets/*.css');
+$cssFile = !empty($cssFiles) ? basename($cssFiles[0]) : 'index-DRQG0K5B.css';
+
+$jsFiles = glob(__DIR__ . '/public/assets/index-*.js');
+// Pick newest JS bundle
+$jsFile = 'index-CVNSmOA_.js';
+if (!empty($jsFiles)) {
+    usort($jsFiles, function ($a, $b) { return filemtime($b) - filemtime($a); });
+    $jsFile = basename($jsFiles[0]);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -240,8 +251,8 @@ $assetPrefix = $basePath . '/assets';
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" crossorigin href="<?= htmlspecialchars($assetPrefix) ?>/index-DRQG0K5B.css">
-    <script type="module" crossorigin src="<?= htmlspecialchars($assetPrefix) ?>/index-xkUZ-plk.js"></script>
+    <link rel="stylesheet" crossorigin href="<?= htmlspecialchars($assetPrefix . '/' . $cssFile) ?>">
+    <script type="module" crossorigin src="<?= htmlspecialchars($assetPrefix . '/' . $jsFile) ?>"></script>
   </head>
   <body class="bg-luxury-950 text-slate-100 antialiased selection:bg-luxury-gold selection:text-black">
     <div id="root"></div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { X, Trash2, Plus, Minus, ShoppingBag, ShieldCheck, Tag, ArrowRight } from 'lucide-react';
 import { useCart } from '../context/CartContext.js';
-import { formatCurrencyCents } from '../../../server/services/pricingService.js';
+import { formatCurrencyCents } from '../../../shared/types.js';
 
 interface CartDrawerProps {
   onProceedToCheckout: () => void;
