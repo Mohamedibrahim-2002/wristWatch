@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, .font-serif {
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.05em;
+  }
+}
+
+/* Custom Scrollbar for Luxury Dark Theme */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0d12;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2d3a56;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c5a059;
+}
+
+/* Gold Gradient Shimmer */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #e4c88e 0%, #c5a059 50%, #997637 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-gradient-border {
+  border-image: linear-gradient(to right, #c5a059, #e4c88e, #997637) 1;
+}
+
+/* Watch Balance Wheel & Gear Oscillation Keyframes */
+@keyframes oscillate {
+  0% { transform: rotate(-25deg); }
+  50% { transform: rotate(25deg); }
+  100% { transform: rotate(-25deg); }
+}
+
+@keyframes slow-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes second-tick {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-balance-wheel {
+  transform-origin: center;
+  animation: oscillate 0.4s ease-in-out infinite;
+}
+
+.animate-slow-gear {
+  transform-origin: center;
+  animation: slow-spin 30s linear infinite;
+}
+
+.animate-second-hand {
+  transform-origin: center;
+  animation: second-tick 60s steps(60, end) infinite;
+}

@@ -1,0 +1,220 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "serialNumber": "urn:uuid:ffnqyat8t5g",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-11-03T15:14:28.011Z",
+    "tools": [
+      {
+        "vendor": "Aethel & Kronos DevSecOps",
+        "name": "SWEBOK-v4-SBOM-Engine",
+        "version": "1.0.0"
+      }
+    ],
+    "component": {
+      "type": "application",
+      "name": "wristwatch-swebok-app",
+      "version": "1.0.0",
+      "description": "Wrist Watch Web Application adhering to IEEE SWEBOK v4 standards: secure e-commerce, interactive luxury watch configurator, and DevSecOps controls"
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "bcryptjs",
+      "version": "3.0.3",
+      "purl": "pkg:npm/bcryptjs@3.0.3",
+      "scope": "required"
+    },
+    {
+      "type": "library",
+      "name": "cookie-parser",
+      "version": "1.4.7",
+      "purl": "pkg:npm/cookie-parser@1.4.7",
+      "scope": "required"
+    },
+    {
+      "type": "library",
+      "name": "cors",
+      "version": "2.8.5",
+      "purl": "pkg:npm/cors@2.8.5",
+      "scope": "required"
+    },
+    {
+      "type": "library",
+      "name": "dotenv",
+      "version": "16.4.7",
+      "purl": "pkg:npm/dotenv@16.4.7",
+      "scope": "required"
+    },
+    {
+      "type": "library",
+      "name": "express",
+      "version": "4.21.2",
+      "purl": "pkg:npm/express@4.21.2",
+      "scope": "required"
+    },
+    {
+      "type": "library",
+      "name": "helmet",
+      "version": "8.0.0",
+      "purl": "pkg:npm/helmet@8.0.0",
+      "scope": "required"
+    },
+    {
+      "type": "library",
+      "name": "jsonwebtoken",
+      "version": "9.0.2",
+      "purl": "pkg:npm/jsonwebtoken@9.0.2",
+      "scope": "required"
+    },
+    {
+      "type": "library",
+      "name": "lucide-react",
+      "version": "1.16.0",
+      "purl": "pkg:npm/lucide-react@1.16.0",
+      "scope": "required"
+    },
+    {
+      "type": "library",
+      "name": "react",
+      "version": "18.3.1",
+      "purl": "pkg:npm/react@18.3.1",
+      "scope": "required"
+    },
+    {
+      "type": "library",
+      "name": "react-dom",
+      "version": "18.3.1",
+      "purl": "pkg:npm/react-dom@18.3.1",
+      "scope": "required"
+    },
+    {
+      "type": "library",
+      "name": "zod",
+      "version": "4.6.7",
+      "purl": "pkg:npm/zod@4.6.7",
+      "scope": "required"
+    },
+    {
+      "type": "library",
+      "name": "@types/bcryptjs",
+      "version": "2.4.6",
+      "purl": "pkg:npm/@types/bcryptjs@2.4.6",
+      "scope": "optional"
+    },
+    {
+      "type": "library",
+      "name": "@types/cookie-parser",
+      "version": "1.4.8",
+      "purl": "pkg:npm/@types/cookie-parser@1.4.8",
+      "scope": "optional"
+    },
+    {
+      "type": "library",
+      "name": "@types/cors",
+      "version": "2.8.17",
+      "purl": "pkg:npm/@types/cors@2.8.17",
+      "scope": "optional"
+    },
+    {
+      "type": "library",
+      "name": "@types/express",
+      "version": "5.0.0",
+      "purl": "pkg:npm/@types/express@5.0.0",
+      "scope": "optional"
+    },
+    {
+      "type": "library",
+      "name": "@types/jsonwebtoken",
+      "version": "9.0.9",
+      "purl": "pkg:npm/@types/jsonwebtoken@9.0.9",
+      "scope": "optional"
+    },
+    {
+      "type": "library",
+      "name": "@types/node",
+      "version": "22.13.9",
+      "purl": "pkg:npm/@types/node@22.13.9",
+      "scope": "optional"
+    },
+    {
+      "type": "library",
+      "name": "@types/react",
+      "version": "18.3.18",
+      "purl": "pkg:npm/@types/react@18.3.18",
+      "scope": "optional"
+    },
+    {
+      "type": "library",
+      "name": "@types/react-dom",
+      "version": "18.3.5",
+      "purl": "pkg:npm/@types/react-dom@18.3.5",
+      "scope": "optional"
+    },
+    {
+      "type": "library",
+      "name": "@types/supertest",
+      "version": "6.0.2",
+      "purl": "pkg:npm/@types/supertest@6.0.2",
+      "scope": "optional"
+    },
+    {
+      "type": "library",
+      "name": "@vitejs/plugin-react",
+      "version": "4.3.4",
+      "purl": "pkg:npm/@vitejs/plugin-react@4.3.4",
+      "scope": "optional"
+    },
+    {
+      "type": "library",
+      "name": "autoprefixer",
+      "version": "10.4.21",
+      "purl": "pkg:npm/autoprefixer@10.4.21",
+      "scope": "optional"
+    },
+    {
+      "type": "library",
+      "name": "postcss",
+      "version": "8.5.3",
+      "purl": "pkg:npm/postcss@8.5.3",
+      "scope": "optional"
+    },
+    {
+      "type": "library",
+      "name": "supertest",
+      "version": "7.0.0",
+      "purl": "pkg:npm/supertest@7.0.0",
+      "scope": "optional"
+    },
+    {
+      "type": "library",
+      "name": "tailwindcss",
+      "version": "3.4.17",
+      "purl": "pkg:npm/tailwindcss@3.4.17",
+      "scope": "optional"
+    },
+    {
+      "type": "library",
+      "name": "tsx",
+      "version": "4.19.3",
+      "purl": "pkg:npm/tsx@4.19.3",
+      "scope": "optional"
+    },
+    {
+      "type": "library",
+      "name": "typescript",
+      "version": "5.8.2",
+      "purl": "pkg:npm/typescript@5.8.2",
+      "scope": "optional"
+    },
+    {
+      "type": "library",
+      "name": "vitest",
+      "version": "5.1.0",
+      "purl": "pkg:npm/vitest@5.1.0",
+      "scope": "optional"
+    }
+  ]
+}
